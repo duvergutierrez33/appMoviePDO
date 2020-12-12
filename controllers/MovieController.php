@@ -49,6 +49,7 @@ class MovieController
         //inserción Pelicula       
         $respMovie = $this->movieModel->newMovie($arrMovie);
 
+
         //Obtener ultimo id registrado de la Pelicula
         $lastId = $this->movieModel->getLastId();
 

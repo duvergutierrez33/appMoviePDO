@@ -22,7 +22,13 @@ class RoleModel
     public function getAll()
     {
     	try {    		
-    		$strSql = " SELECT * FROM roles" ;
+    		$strSql = " SELECT 
+                            r.*, 
+                            s.name as statusName 
+                        FROM roles r
+                        INNER JOIN statuses s
+                        ON r.status_id = s.id                        
+                    ";
     		return $this->pdo->select($strSql);
     	} catch (PDOException $e) {
     		die($e->getMessage());
@@ -45,6 +51,28 @@ class RoleModel
             $strWhere = 'id = '. $data['id'];
             $table = 'roles';
             $this->pdo->delete($table, $strWhere);
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }    
+    }
+
+    public function getById($id)
+    {
+       try {            
+            $strSql = "SELECT * FROM roles WHERE id=:id";
+            $arrayData = ['id' => $id];            
+            return $this->pdo->select($strSql, $arrayData);
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function editRole($data)
+    {
+        try {            
+            $strWhere = 'id = '. $data['id'];
+            $table = 'roles';
+            $this->pdo->update($table, $data, $strWhere);
         } catch (PDOException $e) {
             die($e->getMessage());
         }    

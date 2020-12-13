@@ -26,7 +26,16 @@ class RentalModel
     public function getAll()
     {
     	try {    		
-    		$strSql = " SELECT * FROM rentals ";
+            $strSql = " SELECT 
+                            r.*, 
+                            u.name as userName, 
+                            s.name as statusName 
+                        FROM rentals r
+                        INNER JOIN statuses s
+                        ON r.status_id = s.id
+                        INNER JOIN users u
+                        ON r.user_id = u.id
+                    ";
     		return $this->pdo->select($strSql);
     	} catch (PDOException $e) {
     		die($e->getMessage());
@@ -42,28 +51,6 @@ class RentalModel
         }
     }
 
-    public function getById($id)
-    {
-       try {            
-            $strSql = "SELECT * FROM users WHERE id=:id";
-            $arrayData = ['id' => $id];            
-            return $this->pdo->select($strSql, $arrayData);
-        } catch (PDOException $e) {
-            die($e->getMessage());
-        }
-    }
-
-    public function editUser($data)
-    {
-        try {            
-            $strWhere = 'id = '. $data['id'];
-            $table = 'users';
-            $this->pdo->update($table, $data, $strWhere);
-        } catch (PDOException $e) {
-            die($e->getMessage());
-        }    
-    }
-
     public function deleteRental($data)
     {
         try {            
@@ -74,4 +61,28 @@ class RentalModel
             die($e->getMessage());
         }    
     }
+
+    public function getById($id)
+    {
+       try {            
+            $strSql = "SELECT * FROM rentals WHERE id=:id";
+            $arrayData = ['id' => $id];            
+            return $this->pdo->select($strSql, $arrayData);
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function editRental($data)
+    {
+        try {            
+            $strWhere = 'id = '. $data['id'];
+            $table = 'rentals';
+            $this->pdo->update($table, $data, $strWhere);
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }    
+    }
+
+    
 }

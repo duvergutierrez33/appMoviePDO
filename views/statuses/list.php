@@ -20,7 +20,7 @@
 				<?php foreach($statuses as $status) : ?>
 					<tr>
 						<td><?php echo $status->name ?></td>
-						<td><?php echo $status->type_status_id ?></td>
+						<td><?php echo $status->typeStatusName ?></td>
 						<td>
 							<a href="?controller=status&method=edit&id=<?php echo $status->id;?>" class="btn btn-secondary">Editar</a>
 							<a href="?controller=status&method=delete&id=<?php echo $status->id;?>" class="btn btn-danger">Eliminar</a>

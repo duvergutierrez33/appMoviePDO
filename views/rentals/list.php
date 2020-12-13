@@ -23,8 +23,8 @@
 				<?php foreach($rentals as $rental) : ?>
 					<tr>
 						<td><?php echo $rental->total ?></td>
-						<td><?php echo $rental->user_id ?></td>
-						<td><?php echo $rental->status_id ?></td>
+						<td><?php echo $rental->userName ?></td>
+						<td><?php echo $rental->statusName ?></td>
 						<td><?php echo $rental->start_date ?></td>
 						<td><?php echo $rental->end_date ?></td>
 						<td>

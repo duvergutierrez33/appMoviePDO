@@ -1,6 +1,7 @@
 <?php
 
 require 'models/CategoryModel.php';
+require 'models/StatusModel.php';
 
 /**
  * Clase controlador Categorias
@@ -37,5 +38,31 @@ class CategoryController
     {        
         $this->categoryModel->deleteCategory($_REQUEST);
         header('Location: ?controller=category');
+    }
+
+    public function edit()
+    {
+        if(isset($_REQUEST['id'])) {
+            $id = $_REQUEST['id'];
+
+            $category = $this->categoryModel->getById($id);
+            $status = new StatusModel;
+            $statuses = $status->getAll();
+            
+            require 'views/layout.php';
+            require 'views/categories/edit.php';
+        } else {
+            echo "categoria no Existe";
+        }
+    }
+
+    public function update()
+    {
+        if(isset($_POST)) {
+            $this->categoryModel->editCategory($_POST);
+            header('Location: ?controller=category');
+        } else {
+            echo "Error, acción no permitida.";    
+        }
     }
 }

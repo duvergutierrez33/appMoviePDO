@@ -23,7 +23,13 @@ class CategoryModel
     public function getAll()
     {
     	try {    		
-    		$strSql = "SELECT * FROM categories";
+    		$strSql = " SELECT 
+                            c.*, 
+                            s.name as statusName  
+                        FROM categories c
+                        INNER JOIN statuses s
+                        ON c.status_id = s.id                        
+                    ";
     		return $this->pdo->select($strSql);
     	} catch (PDOException $e) {
     		die($e->getMessage());
@@ -46,6 +52,28 @@ class CategoryModel
             $strWhere = 'id = '. $data['id'];
             $table = 'categories';
             $this->pdo->delete($table, $strWhere);
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }    
+    }
+
+    public function getById($id)
+    {
+       try {            
+            $strSql = "SELECT * FROM categories WHERE id=:id";
+            $arrayData = ['id' => $id];            
+            return $this->pdo->select($strSql, $arrayData);
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function editCategory($data)
+    {
+        try {            
+            $strWhere = 'id = '. $data['id'];
+            $table = 'categories';
+            $this->pdo->update($table, $data, $strWhere);
         } catch (PDOException $e) {
             die($e->getMessage());
         }    

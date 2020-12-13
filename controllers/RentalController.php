@@ -44,4 +44,32 @@ class RentalController
         $this->rentalModel->deleteRental($_REQUEST);
         header('Location: ?controller=rental');
     }
+
+    public function edit()
+    {
+        if(isset($_REQUEST['id'])) {
+            $id = $_REQUEST['id'];
+
+            $rental = $this->rentalModel->getById($id);
+            $status = new StatusModel;
+            $statuses = $status->getAll();
+            $user = new UserModel;
+            $users = $user->getAll();
+            
+            require 'views/layout.php';
+            require 'views/rentals/edit.php';
+        } else {
+            echo "categoria no Existe";
+        }
+    }
+
+    public function update()
+    {
+        if(isset($_POST)) {
+            $this->rentalModel->editRental($_POST);
+            header('Location: ?controller=rental');
+        } else {
+            echo "Error, acción no permitida.";    
+        }
+    }
 }

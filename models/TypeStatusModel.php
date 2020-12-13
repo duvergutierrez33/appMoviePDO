@@ -22,10 +22,32 @@ class TypeStatusModel
     public function getAll()
     {
     	try {    		
-    		$strSql = "SELECT * FROM type_statuses";
+    		$strSql = " SELECT * FROM type_statuses ";
     		return $this->pdo->select($strSql);
     	} catch (PDOException $e) {
     		die($e->getMessage());
     	}
-    }    
+    }
+    
+    public function getById($id)
+    {
+       try {            
+            $strSql = "SELECT * FROM type_statuses WHERE id=:id";
+            $arrayData = ['id' => $id];            
+            return $this->pdo->select($strSql, $arrayData);
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function editTypeStatus($data)
+    {
+        try {            
+            $strWhere = 'id = '. $data['id'];
+            $table = 'type_statuses';
+            $this->pdo->update($table, $data, $strWhere);
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }    
+    }
 }

@@ -1,37 +1,33 @@
 <main class="container">
 	<section class="col-md-12 text-center my-4">
-		<h1>Editar Pelicula</h1>
+		<h1>Editar Estados</h1>
 	</section>	
 	<section class="row mt-2">
 		<!-- Test Line Comment -->
 		<div class="card w-50 m-auto">
 			<div class="card-header container">
-				<h2>Información Pelicula</h2>
+				<h2>Información Estados</h2>
 			</div>
 
 			<div class="card-body w-100">
-				<form action="?controller=movie&method=update" method="post">
+				<form action="?controller=status&method=update" method="post">
 
-					<input type="hidden" name="id" value="<?php echo $movie[0]->id; ?>">
+					<input type="hidden" name="id" value="<?php echo $status[0]->id; ?>">
 
 					<div class="form-group">
 						<label>Nombre</label>
-						<input type="text" name="name" class="form-control" placeholder="Ingrese su nombre" value="<?php echo $movie[0]->name;  ?>">
+						<input type="text" name="name" class="form-control" placeholder="Ingrese su nombre" value="<?php echo $status[0]->name;  ?>">
 					</div>
 					<div class="form-group">
-						<label>Derscripción</label>
-						<input type="text" name="description" class="form-control" placeholder="" value="<?php echo $movie[0]->description; ?>">
-					</div>					
-					<div class="form-group">
-						<label>Usuario</label>
-						<select name="user_id" class="form-control">
+						<label>Tipo de Estado</label>
+						<select name="type_status_id " class="form-control">
 							<option value="">Seleccione...</option>							
 							<?php
-								foreach($users as $user) {
-									if($user->id == $movie[0]->user_id)
-										echo '<option selected value="'.$user->id.'">'.$user->name.'</option>';
+								foreach($typeStatuses as $typeStatus) {
+									if($typeStatus->id == $status[0]->type_status_id)
+										echo '<option selected value="'.$typeStatus->id.'">'.$typeStatus->name.'</option>';
 									else
-										echo '<option value="'.$user->id.'">'.$user->name.'</option>';
+										echo '<option value="'.$typeStatus->id.'">'.$typeStatus->name.'</option>';
 
 								}
 							?>

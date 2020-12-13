@@ -22,7 +22,13 @@ class StatusModel
     public function getAll()
     {
     	try {    		
-    		$strSql = " SELECT * FROM statuses" ;
+    		$strSql = " SELECT 
+                            s.*, 
+                            ts.name as typeStatusName  
+                        FROM statuses s
+                        INNER JOIN type_statuses ts
+                        ON s.type_status_id = ts.id                        
+                    ";
     		return $this->pdo->select($strSql);
     	} catch (PDOException $e) {
     		die($e->getMessage());

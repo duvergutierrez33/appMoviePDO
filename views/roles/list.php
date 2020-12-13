@@ -20,7 +20,7 @@
 				<?php foreach($roles as $role) : ?>
 					<tr>
 						<td><?php echo $role->name ?></td>
-						<td><?php echo $role->status_id ?></td>
+						<td><?php echo $role->statusName ?></td>
 						<td>
 							<a href="?controller=role&method=edit&id=<?php echo $role->id;?>" class="btn btn-secondary">Editar</a>
 							<a href="?controller=role&method=delete&id=<?php echo $role->id;?>" class="btn btn-danger">Eliminar</a>

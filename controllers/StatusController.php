@@ -38,4 +38,30 @@ class StatusController
         $this->statusModel->deleteStatus($_REQUEST);
         header('Location: ?controller=status');
     }
+
+     public function edit()
+    {
+        if(isset($_REQUEST['id'])) {
+            $id = $_REQUEST['id'];
+
+            $status = $this->statusModel->getById($id);
+            $typeStatus = new TypeStatusModel;
+            $typeStatuses = $typeStatus->getAll();
+                        
+            require 'views/layout.php';
+            require 'views/statuses/edit.php';
+        } else {
+            echo "categoria no Existe";
+        }
+    }
+
+    public function update()
+    {
+        if(isset($_POST)) {
+            $this->statusModel->editTypeStatus($_POST);
+            header('Location: ?controller=Status');
+        } else {
+            echo "Error, acción no permitida.";    
+        }
+    }
 }

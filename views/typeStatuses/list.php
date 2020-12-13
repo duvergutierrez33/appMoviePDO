@@ -19,8 +19,9 @@
 			<tbody>
 				<?php foreach($typeStatuses as $typeStatus) : ?>
 					<tr>
-						<td><?php echo $typeStatus->total ?></td>
-						<td><?php echo $typeStatus->user_id ?></td>
+						<td><?php echo $typeStatus->id?></td>
+
+						<td><?php echo $typeStatus->name ?></td>
 						<td>
 							<a href="?controller=typeStatus&method=edit&id=<?php echo $typeStatus->id;?>" class="btn btn-secondary">Editar</a>
 							<a href="?controller=typeStatus&method=delete&id=<?php echo $typeStatus->id;?>" class="btn btn-danger">Eliminar</a>
